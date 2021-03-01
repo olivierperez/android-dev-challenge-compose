@@ -15,11 +15,11 @@
  */
 package com.example.androiddevchallenge.domain
 
-import androidx.annotation.StringRes
+import androidx.annotation.DrawableRes
 
 class Puppy(
     val id: Int,
     val name: String,
-    @StringRes
+    @DrawableRes
     val imageRes: Int
 )
