@@ -2,16 +2,16 @@ package com.example.androiddevchallenge.ui.toolkit
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -22,28 +22,34 @@ import com.example.androiddevchallenge.R
 
 @Composable
 fun PuppyCard(
+    modifier: Modifier = Modifier,
     @DrawableRes puppyResource: Int,
     name: String,
-    backgroundColor: Color = Color.Black,
-    contentColor: Color = Color.White,
+    backgroundColor: Color = MaterialTheme.colors.primary,
+    contentColor: Color = contentColorFor(backgroundColor),
+    onClick: (() -> Unit)? = null,
 ) {
-    Surface(
-        color = backgroundColor,
+    Card(
+        modifier = modifier
+            .semantics(mergeDescendants = true) {},
+        backgroundColor = backgroundColor,
         contentColor = contentColor,
-        modifier = Modifier
-            .clip(RoundedCornerShape(20.dp))
-            .semantics(mergeDescendants = true) {}
+        shape = RoundedCornerShape(20.dp),
+        elevation = 4.dp
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .clickable(enabled = onClick != null, onClick = onClick ?: {})
+        ) {
             Image(
                 painter = painterResource(puppyResource),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
             )
             Text(
+                modifier = Modifier.padding(20.dp),
                 text = name,
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(20.dp)
+                style = MaterialTheme.typography.body1
             )
         }
     }
@@ -53,7 +59,7 @@ fun PuppyCard(
 @Composable
 fun PreviewPuppyCard() {
     PuppyCard(
-        R.drawable.puppy_1,
-        name = "Donovan"
+        name = "Donovan",
+        puppyResource = R.drawable.puppy_1
     )
 }
