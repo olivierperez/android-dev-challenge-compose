@@ -24,5 +24,4 @@ class GetPuppies {
     operator fun invoke(): List<Puppy> {
         return provider.getAll()
     }
-
 }

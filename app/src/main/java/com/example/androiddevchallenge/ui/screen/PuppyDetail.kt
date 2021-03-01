@@ -51,7 +51,7 @@ fun PuppyDetail(navController: NavController, getPuppyById: GetPuppyById, puppyI
             navigationIcon = {
                 IconButton(
                     onClick = {
-                              navController.popBackStack()
+                        navController.popBackStack()
                     },
                 ) {
                     Image(

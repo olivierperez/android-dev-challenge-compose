@@ -25,5 +25,4 @@ class GetPuppyById {
         return provider.getAll().firstOrNull { it.id == id }
             ?: error("Puppy $id not found!")
     }
-
 }
